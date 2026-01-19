@@ -250,20 +250,20 @@ export default function Cookies({ backFunction6 }) {
           <div className="flex gap-2 w-full sm:w-auto">
             <button
               onClick={backFunction6}
-              className="flex-1 bg-black text-white font-bold text-[12px] px-4 py-3"
+              className="flex-1 bg-black text-white font-bold text-[12px] px-4 py-3 cursor-pointer"
             >
               ACCEPT ALL
             </button>
             <button
               onClick={backFunction6}
-              className="flex-1 bg-black text-white font-bold text-[12px] px-4 py-3"
+              className="flex-1 bg-black text-white font-bold text-[12px] px-4 py-3 cursor-pointer"
             >
               REJECT ALL
             </button>
           </div>
           <button
             onClick={backFunction6}
-            className="w-full sm:w-auto font-bold text-[12px] px-4 py-3 border"
+            className="w-full sm:w-auto font-bold text-[12px] px-4 py-3 border cursor-pointer"
           >
             ACCEPT CURRENT SELECTION
           </button>

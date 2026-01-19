@@ -36,7 +36,7 @@ export default function ContactPage({ backFunction5 }) {
       </div>
 
         {on && (
-          <span className="absolute top-5.5 right-12 font-mono text-black text-[12px] font-bold">
+          <span className="absolute top-5.5 right-12 font-mono text-black text-[12px] font-bold cursor-pointer">
             YZY WALLET
           </span>
         )}
