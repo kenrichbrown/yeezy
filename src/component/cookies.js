@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 
 export default function Cookies({ backFunction6 }) {
@@ -12,7 +11,6 @@ export default function Cookies({ backFunction6 }) {
   const [foot, footSet] = useState(false);
   const [foot2, foot2Set] = useState(false);
 
-  // lock background scroll
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -24,19 +22,43 @@ export default function Cookies({ backFunction6 }) {
     localStorage.setItem("cookie_targeted_analytics", on);
   }, [on]);
 
+  function toggle() {
+    onSet((prev) => !prev);
+  }
+  function toggle1() {
+    footSet((prev) => !prev);
+  }
+  function toggle2() {
+    foot2Set((prev) => !prev);
+  }
+
+  // Data for the Analytics section
+  const analyticsCookies = [
+    [
+      "rl_session",
+      "YEEZY.COM",
+      "Unique session ID used to track your activity on the site",
+    ],
+    [
+      "rl_anonymous_id",
+      "YEEZY.COM",
+      "Unique anonymous user ID used to track your cart",
+    ],
+    ["rl_page_init_referrer", "YEEZY.COM", "Where you came from to this page"],
+    ["_fbq", "YEEZY.COM", "Facebook tracking cookie used to track actions"],
+    ["_fbp", "YEEZY.COM", "Meta cookie used to distinguish browsers"],
+    ["_fbc", "YEEZY.COM", "Meta cookie storing click ID (fbclid)"],
+    ["ttclid", "YEEZY.COM", "TikTok click ID used for ad attribution"],
+  ];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* BACKDROP */}
-      <div
-        onClick={backFunction6}
-        className="absolute inset-0 bg-black/65"
-      />
+      <div onClick={backFunction6} className="absolute inset-0 bg-black/65" />
 
-      {/* MODAL */}
       <div className="relative bg-white font-mono text-black flex flex-col w-full h-full sm:w-[700px] sm:h-[600px]">
         {/* HEADER */}
         <div className="flex justify-between items-center p-4 border-b border-black/15">
-          <h1 className="font-bold text-[14px] sm:text-[16px]">
+          <h1 className="text-[14px] sm:text-[16px] font-bold px-2 sm:px-5 uppercase">
             MANAGE COOKIE PREFERENCES
           </h1>
           <img
@@ -48,121 +70,164 @@ export default function Cookies({ backFunction6 }) {
         </div>
 
         {/* CONTENT */}
-        <div className="flex-1 overflow-y-auto px-4 sm:px-8">
-          <h2 className="font-bold text-[14px] sm:text-[15px] mt-4">
+        <div className="px-4 sm:px-8 flex-1 overflow-y-auto pb-32">
+          <h1 className="text-[14px] sm:text-[15px] font-bold mt-3 mb-3 uppercase">
             YOUR PRIVACY CHOICES
-          </h2>
-
-          <p className="text-[13px] sm:text-[14px] uppercase text-black/65 mt-2">
+          </h1>
+          <p className="text-[13px] sm:text-[14px] text-black/65 uppercase mb-8">
             In this panel you can express some preferences related to the
-            processing of your personal information.
+            processing of your personal information. YOU MAY REVIEW AND CHANGE
+            EXPRESSED CHOICES AT ANY TIME BY RESURFACING THIS PANEL VIA THE
+            PROVIDED LINK. TO DENY YOUR CONSENT TO THE SPECIFIC PROCESSING
+            ACTIVITIES DESCRIBED BELOW, SWITCH THE TOGGLES TO OFF OR USE THE
+            “REJECT ALL” BUTTON AND CONFIRM YOU WANT TO SAVE YOUR CHOICES.
           </p>
 
-          {/* STRICTLY NECESSARY */}
-          <div className="mt-6 border border-black/15">
-            <button
-              onClick={() => footSet(!foot)}
-              className="w-full flex justify-between items-center px-4 py-3"
-            >
-              <div className="flex items-center gap-2">
+          {/* SECTION 1: STRICTLY NECESSARY */}
+          <div className="border border-black/15">
+            <span className="flex justify-between items-center py-3 px-3">
+              <div className="flex items-center gap-2" onClick={toggle1}>
                 <img
+                  className="w-4 cursor-pointer"
                   src={
                     foot
                       ? "/icons8-down-arrow-64 (1).png"
                       : "/icons8-down-arrow-64.png"
                   }
-                  className="w-4"
                 />
-                <span className="font-bold text-[13px] sm:text-[14px]">
+                <h1 className="font-bold text-[13px] sm:text-[14px]">
                   STRICTLY NECESSARY
-                </span>
+                </h1>
               </div>
-              <img className="w-8" src="/off-button.png" />
-            </button>
+              <img
+                className="w-8 sm:w-9 opacity-50 cursor-not-allowed"
+                src="off-button.png"
+              />
+            </span>
 
             {foot && (
               <div className="border-t border-black/10">
-                <p className="text-[13px] sm:text-[14px] uppercase text-black/65 px-4 py-4">
-                  THESE COOKIES ARE ESSENTIAL FOR THE PROPER FUNCTIONING OF THE
-                  WEBSITE AND CANNOT BE DISABLED.
+                <p className="text-[13px] sm:text-[14px] text-black/65 uppercase py-4 px-3">
+                  Essential cookies that cannot be disabled.
                 </p>
-
-                <p className="font-bold text-[12px] uppercase px-4 pb-2">
+                <p className="font-bold text-[12px] uppercase py-2 px-3 border-t border-black/10">
                   COOKIE TABLE
                 </p>
 
-                {/* ROW 1 */}
-                <div className="border-t border-black/10 px-4 py-3 text-[12px] uppercase">
-                  <p className="font-bold">COOKIE</p>
-                  <p>SWELL - SESSION</p>
-                  <p className="font-bold mt-2">DOMAIN</p>
-                  <p>YEEZY.COM</p>
-                  <p className="font-bold mt-2">DESCRIPTION</p>
-                  <p>SWELL SESSION COOKIE LINKING YOU TO YOUR CART</p>
+                {/* Desktop Header */}
+                <div className="hidden sm:flex font-bold text-[12px] border-t border-dashed border-black/10 py-2 px-3">
+                  <p className="w-[200px]">COOKIE</p>
+                  <p className="w-[140px]">DOMAIN</p>
+                  <p className="flex-1">DESCRIPTION</p>
                 </div>
 
-                {/* ROW 2 */}
-                <div className="border-t border-black/10 px-4 py-3 text-[12px] uppercase">
-                  <p className="font-bold">COOKIE</p>
-                  <p>CC_COOKIE</p>
-                  <p className="font-bold mt-2">DOMAIN</p>
-                  <p>YEEZY.COM</p>
-                  <p className="font-bold mt-2">DESCRIPTION</p>
-                  <p>
-                    CONSENT COOKIE TO TRACK YOUR CONSENT TO OUR USE OF COOKIES
-                  </p>
-                </div>
+                {/* Strictly Necessary Rows */}
+                {[
+                  ["SWELL-SESSION", "YEEZY.COM", "Linking you to your cart"],
+                  ["CC_COOKIE", "YEEZY.COM", "Tracking consent"],
+                ].map(([a, b, c], i) => (
+                  <div
+                    key={i}
+                    className="border-t border-black/10 py-3 px-3 uppercase text-[11px] sm:text-[12px]"
+                  >
+                    <div className="flex flex-col gap-1 sm:hidden">
+                      {" "}
+                      {/* Mobile Stacked */}
+                      <div className="flex">
+                        <span className="w-24 font-bold shrink-0">COOKIE</span>
+                        <span>{a}</span>
+                      </div>
+                      <div className="flex">
+                        <span className="w-24 font-bold shrink-0">DOMAIN</span>
+                        <span>{b}</span>
+                      </div>
+                      <div className="flex">
+                        <span className="w-24 font-bold shrink-0">
+                          DESCRIPTION
+                        </span>
+                        <span className="flex-1">{c}</span>
+                      </div>
+                    </div>
+                    <div className="hidden sm:flex">
+                      {" "}
+                      {/* Desktop Row */}
+                      <p className="w-[200px]">{a}</p>
+                      <p className="w-[140px]">{b}</p>
+                      <p className="flex-1">{c}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
-          {/* TARGETED ANALYTICS */}
-          <div className="mt-4 border border-black/15">
-            <button
-              onClick={() => foot2Set(!foot2)}
-              className="w-full flex justify-between items-center px-4 py-3"
-            >
-              <div className="flex items-center gap-2">
+          {/* SECTION 2: TARGETED ANALYTICS */}
+          <div className="border border-black/15 mt-4">
+            <span className="flex justify-between items-center py-3 px-3">
+              <div className="flex items-center gap-2" onClick={toggle2}>
                 <img
+                  className="w-4 cursor-pointer"
                   src={
                     foot2
                       ? "/icons8-down-arrow-64 (1).png"
                       : "/icons8-down-arrow-64.png"
                   }
-                  className="w-4"
                 />
-                <span className="font-bold text-[13px] sm:text-[14px]">
+                <h1 className="font-bold text-[13px] sm:text-[14px]">
                   TARGETED ANALYTICS
-                </span>
+                </h1>
               </div>
               <img
-                onClick={() => onSet(!on)}
-                className="w-8 cursor-pointer"
+                onClick={toggle}
+                className="w-8 sm:w-9 cursor-pointer"
                 src={on ? "/icons8-toggle-on-50.png" : "/off-button.png"}
               />
-            </button>
+            </span>
 
             {foot2 && (
               <div className="border-t border-black/10">
-                {[
-                  ["rl_session", "Unique session ID used to track your activity on the site"],
-                  ["rl_anonymous_id", "Unique anonymous user ID used to track your cart"],
-                  ["rl_page_init_referrer", "Where you came from to this page"],
-                  ["_fbq", "Facebook tracking cookie used to track actions"],
-                  ["_fbp", "Meta cookie used to distinguish browsers"],
-                  ["_fbc", "Meta cookie storing click ID (fbclid)"],
-                  ["ttclid", "TikTok click ID used for ad attribution"],
-                ].map(([cookie, desc], i) => (
+                <p className="font-bold text-[12px] uppercase py-2 px-3">
+                  COOKIE TABLE
+                </p>
+
+                {/* Desktop Header */}
+                <div className="hidden sm:flex font-bold text-[12px] border-t border-dashed border-black/10 py-2 px-3">
+                  <p className="w-[200px]">COOKIE</p>
+                  <p className="w-[140px]">DOMAIN</p>
+                  <p className="flex-1">DESCRIPTION</p>
+                </div>
+
+                {/* Analytics Rows */}
+                {analyticsCookies.map(([a, b, c], i) => (
                   <div
                     key={i}
-                    className="border-t border-black/10 px-4 py-3 text-[12px] uppercase"
+                    className="border-t border-black/10 py-3 px-3 uppercase text-[11px] sm:text-[12px]"
                   >
-                    <p className="font-bold">COOKIE</p>
-                    <p>{cookie}</p>
-                    <p className="font-bold mt-2">DOMAIN</p>
-                    <p>YEEZY.COM</p>
-                    <p className="font-bold mt-2">DESCRIPTION</p>
-                    <p>{desc}</p>
+                    <div className="flex flex-col gap-1 sm:hidden">
+                      {" "}
+                      {/* Mobile Stacked */}
+                      <div className="flex">
+                        <span className="w-24 font-bold shrink-0">COOKIE</span>
+                        <span>{a}</span>
+                      </div>
+                      <div className="flex">
+                        <span className="w-24 font-bold shrink-0">DOMAIN</span>
+                        <span>{b}</span>
+                      </div>
+                      <div className="flex">
+                        <span className="w-24 font-bold shrink-0">
+                          DESCRIPTION
+                        </span>
+                        <span className="flex-1">{c}</span>
+                      </div>
+                    </div>
+                    <div className="hidden sm:flex">
+                      {" "}
+                      {/* Desktop Row */}
+                      <p className="w-[200px]">{a}</p>
+                      <p className="w-[140px]">{b}</p>
+                      <p className="flex-1">{c}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -170,32 +235,35 @@ export default function Cookies({ backFunction6 }) {
           </div>
 
           {/* MORE INFO */}
-          <div className="border border-black/15 mt-6 px-4 py-5">
-            <p className="font-bold text-[13px] mb-2">MORE INFORMATION</p>
+          <div className="border border-black/15 py-5 px-3 mt-6">
+            <h1 className="font-bold mb-2 text-[13px] uppercase">
+              MORE INFORMATION
+            </h1>
             <p className="text-[12px] uppercase">
-              FOR ANY QUERIES IN RELATION TO MY POLICY ON COOKIES AND YOUR
-              CHOICES, PLEASE CONTACT US
+              Contact us for any queries regarding our cookie policy.
             </p>
           </div>
         </div>
 
         {/* FOOTER */}
-        <div className="border-t border-black/15 px-4 py-4 flex flex-col sm:flex-row gap-3">
+        <div className="absolute bottom-0 left-0 w-full flex flex-col sm:flex-row gap-2 items-center justify-between px-4 py-4 border-t-2 border-black/15 bg-white">
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button
+              onClick={backFunction6}
+              className="flex-1 bg-black text-white font-bold text-[12px] px-4 py-3"
+            >
+              ACCEPT ALL
+            </button>
+            <button
+              onClick={backFunction6}
+              className="flex-1 bg-black text-white font-bold text-[12px] px-4 py-3"
+            >
+              REJECT ALL
+            </button>
+          </div>
           <button
             onClick={backFunction6}
-            className="bg-black text-white py-3 text-[12px] font-bold"
-          >
-            ACCEPT ALL
-          </button>
-          <button
-            onClick={backFunction6}
-            className="bg-black text-white py-3 text-[12px] font-bold"
-          >
-            REJECT ALL
-          </button>
-          <button
-            onClick={backFunction6}
-            className="border py-3 text-[12px] font-bold"
+            className="w-full sm:w-auto font-bold text-[12px] px-4 py-3 border"
           >
             ACCEPT CURRENT SELECTION
           </button>

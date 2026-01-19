@@ -23,10 +23,10 @@ export default function NewsLetter() {
       return () => clearTimeout(firstTimer);
     }
 
-    // 2️⃣ RECURRING SHOW → ANY PAGE AFTER 7 MIN
+    // 2️⃣ RECURRING SHOW → ANY PAGE AFTER 5 MIN
     const interval = setInterval(() => {
       setNews(true);
-    }, 460000); // 7 minutes
+    }, 300000); // 5 minutes
 
     return () => clearInterval(interval);
   }, [pathname]);
