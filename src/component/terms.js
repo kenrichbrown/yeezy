@@ -23,6 +23,7 @@ export default function TermsCom({ backFunction2 }) {
       window.scrollTo(0, scrollY);
     };
   }, []);
+  
 
 
   return (

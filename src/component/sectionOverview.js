@@ -48,6 +48,17 @@ export default function SectionOverview({
     setActive(Math.round(scrollTop / clientHeight));
   };
 
+  useEffect(() => {
+  // lock background scroll
+  const originalOverflow = document.body.style.overflow;
+  document.body.style.overflow = "hidden";
+
+  return () => {
+    // restore scroll when component unmounts
+    document.body.style.overflow = originalOverflow;
+  };
+}, []);
+
   return (
     <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
 

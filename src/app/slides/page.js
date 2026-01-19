@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cloths from "@/data-sources/all-product";
 import SectionOverview from "@/component/sectionOverview";
 import { useGrid } from "@/context/gridContext";
@@ -13,6 +13,12 @@ export default function SlidesOverview() {
   const selectedProducts = cloths.filter(product =>
     selectedNames.includes(product.name)
   );
+
+   useEffect(() => {
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+}, []);
 
   return (
     <div>

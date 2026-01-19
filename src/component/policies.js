@@ -23,6 +23,7 @@ export default function PrivacyCom({ backFunction3 }) {
       window.scrollTo(0, scrollY);
     };
   }, []);
+  
 
 
   return (
